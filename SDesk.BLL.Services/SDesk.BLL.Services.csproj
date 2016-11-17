@@ -40,11 +40,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AttachementService.cs" />
     <Compile Include="MailService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\DAL.EF\SDesk.DAL.EF.csproj">
+    <ProjectReference Include="..\SDesk.DAL.EF\SDesk.DAL.EF.csproj">
       <Project>{0f1d0840-56c3-4cc6-80ea-bd6173679071}</Project>
       <Name>SDesk.DAL.EF</Name>
     </ProjectReference>

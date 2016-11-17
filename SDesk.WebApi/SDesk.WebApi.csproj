@@ -122,6 +122,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\AttachementsController.cs" />
     <Compile Include="Controllers\MailsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -145,11 +146,11 @@
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\DAL.EF\SDesk.DAL.EF.csproj">
+    <ProjectReference Include="..\SDesk.DAL.EF\SDesk.DAL.EF.csproj">
       <Project>{0f1d0840-56c3-4cc6-80ea-bd6173679071}</Project>
       <Name>SDesk.DAL.EF</Name>
     </ProjectReference>
-    <ProjectReference Include="..\BLL.Services\SDesk.BLL.Services.csproj">
+    <ProjectReference Include="..\SDesk.BLL.Services\SDesk.BLL.Services.csproj">
       <Project>{43eb80bd-49f1-4233-ae5f-58292ebfb0b1}</Project>
       <Name>SDesk.BLL.Services</Name>
     </ProjectReference>

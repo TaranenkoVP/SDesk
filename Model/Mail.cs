@@ -12,8 +12,8 @@ namespace Epam.Sdesk.Model
         public string Body { get; set; }
         public int AttachementId { get; set; } //save on disk, thus we have to have an object for that
         public Priority Priority { get; set; } //enum
-        public DateTime Received { get; set; } //date when we received email
-        public DateTime Saved { get; set; } //date when we saved mail entity
+        public DateTime? Received { get; set; } //date when we received email
+        public DateTime? Saved { get; set; } //date when we saved mail entity
 
     }
 }
