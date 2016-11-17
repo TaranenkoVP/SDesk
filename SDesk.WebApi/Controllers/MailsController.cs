@@ -1,29 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Web.Http;
+﻿using System.Web.Http;
 using Epam.Sdesk.Model;
-using SDesk.BLL.Services;
 using SDesk.DAL.EF;
 
 namespace SDesk.WebApi.Controllers
 {
     public class MailsController : ApiController
     {
-        private MailService _mailService;
+        private readonly IRepository<Mail> _mailRepository;
+        private readonly IUnitOfWork _unit;
 
         public MailsController()
         {
-            _mailService = new MailService(new UnitOfWork<SdeskContext>());
+            _unit = new UnitOfWork<SdeskContext>();
+            _mailRepository = _unit.GetRepository<Mail>();
         }
 
         // GET: api/Mails
         public IHttpActionResult Get()
         {
-            var mails = _mailService.GetAll();
+            var mails = _mailRepository.GetAll();
             if (mails == null)
             {
                 return NotFound();
@@ -31,10 +26,10 @@ namespace SDesk.WebApi.Controllers
             return Ok(mails);
         }
 
-        // GET: api/Mails/5
+        // GET /api/mails/{id}
         public IHttpActionResult Get(long id)
         {
-            var mail = _mailService.GetById(id);
+            var mail = _mailRepository.GetById(id);
             if (mail == null)
             {
                 return NotFound();
@@ -42,33 +37,26 @@ namespace SDesk.WebApi.Controllers
             return Ok(mail);
         }
 
-        // POST: api/Mails
+        // POST: /api/mails
         public IHttpActionResult Post([FromBody] Mail mail)
         {
             if (mail == null)
             {
                 return NotFound();
             }
-            try
-            {
-                _mailService.Add(mail);
-            }
-            catch (Exception)
-            {
-                return InternalServerError();
-            }
+            _mailRepository.Add(mail);
             return Created(Request.RequestUri + "/" + mail.Id, mail);
         }
 
-        // PUT: api/Mails/5
-        public IHttpActionResult Put(long id, [FromBody]Mail mail)
+        // PUT: /api/mails/{id}
+        public IHttpActionResult Put(long id, [FromBody] Mail mail)
         {
-            if (mail == null || mail.Id != id)
+            if ((mail == null) || (mail.Id != id))
             {
                 return BadRequest();
             }
             IHttpActionResult answerHttpActionResult;
-            if (_mailService.GetById(id) == null)
+            if (_mailRepository.GetById(id) == null)
             {
                 answerHttpActionResult = Created(Request.RequestUri + "/" + mail.Id, mail);
             }
@@ -76,33 +64,19 @@ namespace SDesk.WebApi.Controllers
             {
                 answerHttpActionResult = Ok(mail);
             }
-            try
-            {
-                _mailService.Edit(mail);
-            }
-            catch (Exception)
-            {
-                return InternalServerError();
-            }
+            _mailRepository.Update(mail);
             return answerHttpActionResult;
         }
 
-        // DELETE: api/Mails/5
+        // DELETE: /api/mails/{id}
         public IHttpActionResult Delete(long id)
         {
-            var mail = _mailService.GetById(id);
+            var mail = _mailRepository.GetById(id);
             if (mail == null)
             {
                 return NotFound();
             }
-            try
-            {
-                _mailService.Delete(id);
-            }
-            catch (Exception)
-            {
-                return InternalServerError();
-            }
+            _mailRepository.Delete(mail);
             return Ok(id);
         }
     }

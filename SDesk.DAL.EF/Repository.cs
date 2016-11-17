@@ -18,25 +18,28 @@ namespace SDesk.DAL.EF
             _dbset = _context.Set<T>();
         }
 
-        public void Add(T entity)
+        public bool Add(T entity)
         {
             _dbset.Add(entity);
+            return true;
         }
 
-        public void Delete(T entity)
+        public bool Delete(T entity)
         {
             var entry = _context.Entry(entity);
             entry.State = EntityState.Deleted;
+            return true;
         }
 
-        public void Update(T entity)
+        public bool Update(T entity)
         {
             //var entry = _context.Entry(entity);
             //if (entry.State == EntityState.Detached)
             //    _dbset.Attach(entity);
 
             //entry.State = EntityState.Modified;
-            _dbset.AddOrUpdate(entity); 
+            _dbset.AddOrUpdate(entity);
+            return true;
         }
 
         public T GetById(long id)

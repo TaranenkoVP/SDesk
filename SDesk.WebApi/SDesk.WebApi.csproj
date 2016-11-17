@@ -150,10 +150,6 @@
       <Project>{0f1d0840-56c3-4cc6-80ea-bd6173679071}</Project>
       <Name>SDesk.DAL.EF</Name>
     </ProjectReference>
-    <ProjectReference Include="..\SDesk.BLL.Services\SDesk.BLL.Services.csproj">
-      <Project>{43eb80bd-49f1-4233-ae5f-58292ebfb0b1}</Project>
-      <Name>SDesk.BLL.Services</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Model\SDesk.DAL.Model.csproj">
       <Project>{111e4442-eb73-48a4-95a1-5e700de79eeb}</Project>
       <Name>SDesk.DAL.Model</Name>
