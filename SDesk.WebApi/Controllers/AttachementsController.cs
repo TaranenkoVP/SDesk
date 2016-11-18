@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Net.Mail;
+﻿using System.Linq;
 using System.Web.Http;
 using Epam.Sdesk.Model;
 using SDesk.DAL.EF;
@@ -88,7 +83,7 @@ namespace SDesk.WebApi.Controllers
         [HttpPost]
         public IHttpActionResult CreateAttachment(int id, [FromBody]Attachement attachment)
         {
-            if (attachment == null)
+            if (attachment == null || id != attachment.MailId)
             {
                 return BadRequest();
             }
@@ -100,14 +95,49 @@ namespace SDesk.WebApi.Controllers
             return Created("/api/mails/" + id + "/attachments/" + attachment.Id, attachment);
         }
 
-        // PUT: api/Attachements/5
-        public void Put(int id, [FromBody]string value)
+        // PUT: api/mails/{id}/attachements/{attId}
+        [HttpPut]
+        [Route("{attId}")]
+        public IHttpActionResult UpdateAttachment(int id, int attId, [FromBody]Attachement attachment)
         {
+            if ((attachment == null) || (attachment.MailId != id) || (attachment.Id != attId))
+            {
+                return BadRequest();
+            }
+            var attachementToUpdate = _attachementRepository.GetAll().FirstOrDefault(x => x.MailId == id && x.Id == attId);
+            if (attachementToUpdate == null)
+            {
+                return BadRequest();
+            }
+            IHttpActionResult answerHttpActionResult;
+            if (_attachementRepository.GetById(id) == null)
+            {
+                answerHttpActionResult = Created("/api/mails/" + id + "/attachments/" + attachment.Id, attachment);
+            }
+            else
+            {
+                answerHttpActionResult = Ok(attachment);
+            }
+            bool isSuccess = _attachementRepository.Update(attachment);
+            return !isSuccess ? InternalServerError() : answerHttpActionResult;
         }
 
-        // DELETE: api/Attachements/5
-        public void Delete(int id)
+        // DELETE api/mails/{id}/attachements/{attId}
+        [HttpDelete]
+        [Route("{attId}")]
+        public IHttpActionResult AttachmentDel(int id, int attId)
         {
+            var attachementToDelete = _attachementRepository.GetAll().FirstOrDefault(x => x.MailId == id && x.Id == attId);
+            if (attachementToDelete == null)
+            {
+                return BadRequest();
+            }
+            bool isSuccess = _attachementRepository.Delete(attachementToDelete);
+            if (!isSuccess)
+            {
+                return InternalServerError();
+            }
+            return Ok(attId);
         }
     }
 }

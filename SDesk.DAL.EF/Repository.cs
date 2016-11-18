@@ -33,11 +33,6 @@ namespace SDesk.DAL.EF
 
         public bool Update(T entity)
         {
-            //var entry = _context.Entry(entity);
-            //if (entry.State == EntityState.Detached)
-            //    _dbset.Attach(entity);
-
-            //entry.State = EntityState.Modified;
             _dbset.AddOrUpdate(entity);
             return true;
         }

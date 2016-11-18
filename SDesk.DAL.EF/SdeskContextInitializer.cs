@@ -25,6 +25,13 @@ namespace SDesk.DAL.EF
                 new Attachement() {FileName = "FileName2", FileExtention = "FileExtention2", StatusId = 2}
             };
             context.Attachements.AddRange(attachements);
+
+            JiraItem[] jiraItems =
+            {
+                new JiraItem() {JiraNumber = 1},
+                new JiraItem() {JiraNumber = 2}
+            };
+            context.JiraItems.AddRange(jiraItems);
             context.SaveChanges();
         }
     }

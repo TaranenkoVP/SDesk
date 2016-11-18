@@ -12,6 +12,9 @@ namespace SDesk.DAL.EF
         } 
 
         public DbSet<Mail> Mails { get; set; }
+
         public DbSet<Attachement> Attachements { get; set; }
+
+        public DbSet<JiraItem> JiraItems { get; set; }
     }
 }
