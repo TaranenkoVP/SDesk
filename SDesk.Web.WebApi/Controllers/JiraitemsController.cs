@@ -7,9 +7,9 @@ using System.Text.RegularExpressions;
 using System.Web.Http;
 using Epam.Sdesk.Model;
 using SDesk.DAL.EF;
-using SDesk.WebApi.Regexes;
+using SDesk.Web.WebApi.Regexes;
 
-namespace SDesk.WebApi.Controllers
+namespace SDesk.Web.WebApi.Controllers
 {
     [RoutePrefix("api/jiraitems")]
     public class JiraitemsController : ApiController
@@ -25,9 +25,10 @@ namespace SDesk.WebApi.Controllers
 
         // GET api/jiraitems/{id}
         // GET api/jiraitems must return the same as for GET api/jiraitems/1                  
-        [Route("{id?}")]
+        [Route("{id:long?}")]
         public IHttpActionResult Get(long id = 1)
         {
+            //throw new NotImplementedException();
             var jiraItem = _jiraItemRepository.GetById(id);
             if (jiraItem == null)
             {
@@ -35,7 +36,9 @@ namespace SDesk.WebApi.Controllers
             }
             return Ok(jiraItem);
         }
-
+        // GET by <Jira-Id : “Jira-1034”>
+        //[Route(@"{id:regex(^Jira-([1-9]\d*)$)}")]
+        
         // GET api/jiraitems/{id:jiraid}
         [Route("{id:jiraid}")]
         public IHttpActionResult Get(string id)
@@ -57,7 +60,5 @@ namespace SDesk.WebApi.Controllers
             }
             return Ok(jiraItem);
         }
-
-        
     }
 }

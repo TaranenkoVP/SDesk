@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Routing;
 using Owin;
-using SDesk.WebApi;
+using SDesk.Web.WebApi;
 
 namespace Sdesk.SelfHost
 {

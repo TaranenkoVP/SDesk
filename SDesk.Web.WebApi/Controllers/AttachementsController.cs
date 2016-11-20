@@ -1,11 +1,13 @@
 ﻿using System.Linq;
 using System.Web.Http;
+using System.Web.Http.Description;
 using Epam.Sdesk.Model;
 using SDesk.DAL.EF;
+using Swashbuckle.Swagger.Annotations;
 
-namespace SDesk.WebApi.Controllers
+namespace SDesk.Web.WebApi.Controllers
 {
-    [RoutePrefix("api/mails/{id}/attachements")]
+    [RoutePrefix("api/mails/{id:int:min(1)}/attachements")]
     public class AttachementsController : ApiController
     {
         private readonly IRepository<Attachement> _attachementRepository;
@@ -16,9 +18,10 @@ namespace SDesk.WebApi.Controllers
             _unit = new UnitOfWork<SdeskContext>();
             _attachementRepository = _unit.GetRepository<Attachement>();
         }
-        
+
         // GET api/mails/{id}/attachements
         [HttpGet]
+        [Route("", Name = "AttachementsByMailId")]
         public IHttpActionResult AttachementsByMailId(int id)
         {
             var attachments = _attachementRepository.GetAll().Where(s => s.MailId == id).ToArray();
@@ -31,8 +34,10 @@ namespace SDesk.WebApi.Controllers
 
         //GET api/mails/{id}/attachements/{attId}
         [HttpGet]
-        [Route("{attId}")]
-        public IHttpActionResult AttachmentById(int id, int attId)
+        [Route("{attId}", Name = "AttachementsByMailIdAndAttachementId")]
+        //[SwaggerOperation("get")]
+        [ApiExplorerSettings(IgnoreApi = true)]
+        public IHttpActionResult AttachementsByMailIdAndAttachementId(int id, int attId)
         {
             var attachment = _attachementRepository.GetAll().Where(s => s.MailId == id).FirstOrDefault(t => t.Id == attId);
             if (attachment == null)
@@ -44,8 +49,10 @@ namespace SDesk.WebApi.Controllers
 
         //GET api/mails/{id}/attachements/{attId}?extention={ext}
         [HttpGet]
-        [Route("{attId}")]
-        public IHttpActionResult AttachementsByIdByExtention(int id, int attId, string extention = null)
+        [Route("{attId}", Name = "AttachementsByMailIdAndAttachementIdAndExtention")]
+        [ApiExplorerSettings(IgnoreApi = true)]
+        //[SwaggerOperation("get1",OperationId = "1")]
+        public IHttpActionResult AttachementsByIdByExAttachementsByMailIdAndAttachementIdAndExtentiontention(int id, int attId, string extention = null)
         {
             var attachment = _attachementRepository.GetAll().Where(a => a.MailId == id).FirstOrDefault(t => t.Id == attId);
             if (attachment == null)
@@ -60,8 +67,9 @@ namespace SDesk.WebApi.Controllers
         }
 
         [HttpGet]
-        [Route("{attId}")]
-        public IHttpActionResult AttachementsByIdByExtentionAndStatus(int id, int attId, string extention = null, int status = 0)
+        [Route("{attId}", Name = "AttachementsByIdByExAttachementsByMailIdAndAttachementIdAndExtentiontentionAndStatus")]
+        //[SwaggerOperation("get3")]
+        public IHttpActionResult AttachementsByIdByExAttachementsByMailIdAndAttachementIdAndExtentiontentionAndStatus(int id, int attId, string extention = null, int status = 0)
         {
             var attachment = _attachementRepository.GetAll().Where(a => a.MailId == id).FirstOrDefault(t => t.Id == attId);
             if (attachment == null)

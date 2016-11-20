@@ -21,8 +21,8 @@ namespace SDesk.DAL.EF
 
             Attachement[] attachements =
             {
-                new Attachement() {FileName = "FileName1", FileExtention = "FileExtention1", StatusId = 1},
-                new Attachement() {FileName = "FileName2", FileExtention = "FileExtention2", StatusId = 2}
+                new Attachement() {MailId = 1, FileName = "FileName1", FileExtention = "FileExtention1", StatusId = 1},
+                new Attachement() {MailId = 2, FileName = "FileName2", FileExtention = "FileExtention2", StatusId = 2}
             };
             context.Attachements.AddRange(attachements);
 

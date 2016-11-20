@@ -5,11 +5,11 @@ using System.Net.Http;
 using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Http.Routing;
-using SDesk.WebApi.Regexes;
+using SDesk.Web.WebApi.Regexes;
 
-namespace SDesk.WebApi.Constraints
+namespace SDesk.Web.WebApi.Constraints
 {
-    public class JiraIdConstraint
+    public class JiraIdConstraint : IHttpRouteConstraint
     {
         private readonly Regex _jiraIdRegex = new JiraRegex().Get();
 
@@ -19,10 +19,7 @@ namespace SDesk.WebApi.Constraints
             if (values.TryGetValue(parameterName, out value) && value != null)
             {
                 var stringValue = value as string;
-                if (stringValue == null)
-                    return false;
-
-                return _jiraIdRegex.IsMatch(stringValue);
+                return stringValue != null && _jiraIdRegex.IsMatch(stringValue);
             }
             return false;
         }
