@@ -134,6 +134,7 @@
     <Compile Include="Controllers\JiraitemsController.cs" />
     <Compile Include="Controllers\Mails2Controller.cs" />
     <Compile Include="Controllers\MailsController.cs" />
+    <Compile Include="Filters\MultipleOperationsWithSameVerbFilter .cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
