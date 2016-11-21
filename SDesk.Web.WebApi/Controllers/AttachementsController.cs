@@ -20,11 +20,14 @@ namespace SDesk.Web.WebApi.Controllers
             _attachementRepository = _unit.GetRepository<Attachement>();
         }
 
-         // GET api/mails/{id}/attachements
-        [HttpGet]
+        // GET api/mails/{id}/attachements
+
         // [Route(Name = "AttachementsByMailIdv1")]
         //[SwaggerOperation("AttachementsByMailIdv12",Tags = new []{"Subscribers", "Organizations"})]
         [SwaggerOperation("AttachementsByMailIdv12", OperationId = "AttachementsByMailIdv1")]
+        [HttpGet]
+        [ActionName("AttachementsByMailIdv122")]
+        //[Route(Name = "AttachementsByMailIdv1")]
         [VersionRoute("api/mails/{id:int:min(1)}/attachements", 1, "AttachementsByMailIdv1")]
         public IHttpActionResult AttachementsByMailIdv1(int id)
         {

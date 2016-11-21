@@ -124,6 +124,7 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\CustomControllerSelector.cs" />
     <Compile Include="App_Start\ExceptionLogger.cs" />
     <Compile Include="App_Start\SwaggerConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
@@ -135,6 +136,7 @@
     <Compile Include="Controllers\Mails2Controller.cs" />
     <Compile Include="Controllers\MailsController.cs" />
     <Compile Include="Filters\MultipleOperationsWithSameVerbFilter .cs" />
+    <Compile Include="Filters\VersionedApiExplorer.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

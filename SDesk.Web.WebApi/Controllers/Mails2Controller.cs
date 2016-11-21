@@ -91,7 +91,7 @@ namespace SDesk.Web.WebApi.Controllers
 
         // GET api/mails/{id}/attachements
         [HttpGet]
-        [SwaggerOperation("AttachementsByMailIdv12", OperationId = "AttachementsByMailIdV2")]
+        //[SwaggerOperation("AttachementsByMailIdv12", OperationId = "AttachementsByMailIdV2")]
         [VersionRoute("api/mails/{id:int:min(1)}/attachements", 2, "AttachementsByMailIdV2")]
         public IHttpActionResult AttachementsByMailIdV2(int id)
         {
