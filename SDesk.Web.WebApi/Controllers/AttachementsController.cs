@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Net;
 using System.Web.Http;
 using System.Web.Http.Description;
 using Epam.Sdesk.Model;
@@ -200,7 +201,7 @@ namespace SDesk.Web.WebApi.Controllers
             {
                 return InternalServerError();
             }
-            return Ok(attId);
+            return StatusCode(HttpStatusCode.NoContent);
         }
     }
 }

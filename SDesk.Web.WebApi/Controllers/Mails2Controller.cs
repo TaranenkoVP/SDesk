@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Net;
 using System.Web.Http;
 using System.Web.Http.Description;
 using Epam.Sdesk.Model;
@@ -126,7 +127,7 @@ namespace SDesk.Web.WebApi.Controllers
             _mailRepository.Delete(mail);
             _unit.Save();
 
-            return Ok(id);
+            return StatusCode(HttpStatusCode.NoContent);
         }
 
         // GET api/mails/{id}/attachements
@@ -305,7 +306,7 @@ namespace SDesk.Web.WebApi.Controllers
             {
                 return InternalServerError();
             }
-            return Ok(attId);
+            return StatusCode(HttpStatusCode.NoContent);
         }
     }
 }
