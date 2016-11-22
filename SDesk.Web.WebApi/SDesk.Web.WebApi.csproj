@@ -33,8 +33,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>
-    </DocumentationFile>
+    <DocumentationFile>bin\SDesk.Web.WebApi.XML</DocumentationFile>
     <RegisterForComInterop>false</RegisterForComInterop>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -124,7 +123,6 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_Start\CustomControllerSelector.cs" />
     <Compile Include="App_Start\ExceptionLogger.cs" />
     <Compile Include="App_Start\SwaggerConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
@@ -135,7 +133,6 @@
     <Compile Include="Controllers\JiraitemsController.cs" />
     <Compile Include="Controllers\Mails2Controller.cs" />
     <Compile Include="Controllers\MailsController.cs" />
-    <Compile Include="Filters\MultipleOperationsWithSameVerbFilter .cs" />
     <Compile Include="Filters\VersionedApiExplorer.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

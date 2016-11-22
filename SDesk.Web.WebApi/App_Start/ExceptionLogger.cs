@@ -10,10 +10,18 @@ using log4net;
 
 namespace SDesk.Web.WebApi
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class ExceptionLogger : IExceptionLogger
     {
         private static readonly ILog Log4Net = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
         public Task LogAsync(ExceptionLoggerContext context, CancellationToken cancellationToken)
         {
             Trace.TraceError(context.ExceptionContext.Exception.ToString());

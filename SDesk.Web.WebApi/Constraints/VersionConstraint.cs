@@ -6,19 +6,41 @@ using System.Web.Http.Routing;
 
 namespace SDesk.Web.WebApi.Constraints
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class VersionConstraint : IHttpRouteConstraint
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public const string VersionHeaderName = "api-version";
         private const int DefaultVersion = 1;
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="allowedVersion"></param>
         public VersionConstraint(int allowedVersion)
         {
             AllowedVersion = allowedVersion;
         }
+        /// <summary>
+        /// 
+        /// </summary>
         public int AllowedVersion
         {
             get;
             private set;
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="route"></param>
+        /// <param name="parameterName"></param>
+        /// <param name="values"></param>
+        /// <param name="routeDirection"></param>
+        /// <returns></returns>
         public bool Match(HttpRequestMessage request, IHttpRoute route, string parameterName, IDictionary<string, object> values, HttpRouteDirection routeDirection)
         {
             if (routeDirection == HttpRouteDirection.UriResolution)

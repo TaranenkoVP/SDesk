@@ -11,6 +11,10 @@ using System.Web.Http.Routing;
 
 namespace SDesk.Web.WebApi.Filters
 {
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="TVersionConstraint"></typeparam>
     public class VersionedApiExplorer<TVersionConstraint> : IApiExplorer
     {
         private IApiExplorer _innerApiExplorer;
@@ -18,6 +22,11 @@ namespace SDesk.Web.WebApi.Filters
         private Lazy<Collection<ApiDescription>> _apiDescriptions;
         private MethodInfo _apiDescriptionPopulator;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="apiExplorer"></param>
+        /// <param name="configuration"></param>
         public VersionedApiExplorer(IApiExplorer apiExplorer, HttpConfiguration configuration)
         {
             _innerApiExplorer = apiExplorer;
@@ -26,7 +35,7 @@ namespace SDesk.Web.WebApi.Filters
                 new Func<Collection<ApiDescription>>(Init));
         }
 
-        public Collection<ApiDescription> ApiDescriptions
+        Collection<ApiDescription> IApiExplorer.ApiDescriptions
         {
             get { return _apiDescriptions.Value; }
         }
@@ -73,6 +82,11 @@ namespace SDesk.Web.WebApi.Filters
             return _apiDescriptionPopulator;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="routes"></param>
+        /// <returns></returns>
         public static IEnumerable<IHttpRoute> FlattenRoutes(IEnumerable<IHttpRoute> routes)
         {
             var flatRoutes = new List<HttpRoute>();

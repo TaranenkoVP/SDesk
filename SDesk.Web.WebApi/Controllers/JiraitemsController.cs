@@ -7,16 +7,22 @@ using System.Text.RegularExpressions;
 using System.Web.Http;
 using Epam.Sdesk.Model;
 using SDesk.DAL.EF;
+using SDesk.Web.WebApi.Attributes;
 using SDesk.Web.WebApi.Regexes;
 
 namespace SDesk.Web.WebApi.Controllers
 {
-    [RoutePrefix("api/jiraitems")]
+    /// <summary>
+    /// Controller with jira items actions 
+    /// </summary>
     public class JiraitemsController : ApiController
     {
         private readonly IRepository<JiraItem> _jiraItemRepository;
-        private readonly IUnitOfWork _unit;
+        private readonly UnitOfWork<SdeskContext> _unit;
         private readonly Regex _jiraRegex = new JiraRegex().Get();
+        /// <summary>
+        /// Constructor
+        /// </summary>
         public JiraitemsController()
         {
             _unit = new UnitOfWork<SdeskContext>();
@@ -25,8 +31,14 @@ namespace SDesk.Web.WebApi.Controllers
 
         // GET api/jiraitems/{id}
         // GET api/jiraitems must return the same as for GET api/jiraitems/1                  
-        [Route("{id:long?}")]
-        public IHttpActionResult Get(long id = 1)
+        /// <summary>
+        /// Get jira item by int Id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [ActionName("JiraItemById")]
+        [VersionRoute("api/jiraitems/{id:long?}", 1)]
+        public IHttpActionResult GetById(long id = 1)
         {
             //throw new NotImplementedException();
             var jiraItem = _jiraItemRepository.GetById(id);
@@ -38,10 +50,16 @@ namespace SDesk.Web.WebApi.Controllers
         }
         // GET by <Jira-Id : “Jira-1034”>
         //[Route(@"{id:regex(^Jira-([1-9]\d*)$)}")]
-        
+
         // GET api/jiraitems/{id:jiraid}
-        [Route("{id:jiraid}")]
-        public IHttpActionResult Get(string id)
+        /// <summary>
+        /// Get jira item by string Id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [ActionName("JiraItemByStringId")]
+        [VersionRoute("api/jiraitems/{id:jiraid}", 1)]
+        public IHttpActionResult GetByStringId(string id)
         {
             var match = _jiraRegex.Match(id);
             if (!match.Success)
